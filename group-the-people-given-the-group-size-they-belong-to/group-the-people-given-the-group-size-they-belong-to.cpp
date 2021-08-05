@@ -11,12 +11,15 @@ public:
         
         for (auto it : gp){
             int idx = 0;
+            int key = it.first;
+            vector<int> val = it.second;
+            
             // separate a vector into pcs if the vector is too long
-            int t = floor(it.second.size() / it.first);
+            int t = floor(val.size() / key);
             for (int i = 0; i != t; i++){
-                vector<int> v = vector<int>(it.second.begin() + idx, it.second.begin() + idx + it.first);
+                vector<int> v = vector<int>(val.begin() + idx, val.begin() + idx + key);
                 res.push_back(v);
-                idx += it.first;
+                idx += key;
             }
         }
     return res;
