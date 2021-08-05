@@ -9,14 +9,15 @@ public:
             gp[groupSizes[i]].push_back(i);
         }
         
-        for (auto it : gp){
+        for (auto &it : gp){
             int idx = 0;
             // separate a vector into pcs if the vector is too long
-            int t = floor(it.second.size() / it.first);
-            for (int i = 0; i != t; i++){
+            int t = it.second.size() / it.first;
+            while (t!= 0) {
                 vector<int> v = vector<int>(it.second.begin() + idx, it.second.begin() + idx + it.first);
                 res.push_back(v);
                 idx += it.first;
+                t--;
             }
         }
     return res;
