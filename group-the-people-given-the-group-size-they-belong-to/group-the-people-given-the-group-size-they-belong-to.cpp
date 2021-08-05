@@ -12,11 +12,11 @@ public:
         for (auto &it : gp){
             int idx = 0;
             // separate a vector into pcs if the vector is too long
-            int t = it.second.size() / it.first;
+            int t = floor(it.second.size() / it.first);
             while (t!= 0) {
                 vector<int> v = vector<int>(it.second.begin() + idx, it.second.begin() + idx + it.first);
-                res.push_back(v);
-                idx += it.first;
+			    res.push_back(v);
+			    idx += it.first;
                 t--;
             }
         }
