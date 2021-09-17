@@ -8,15 +8,22 @@ class Node:
 
 class Solution:
     def levelOrder(self, root: 'Node') -> List[List[int]]:
-        def helper(root, depth, res):
-            if not root: return []
-            while len(res) <= depth: res.append([])
-                
-            res[depth].append(root.val) 
-            for child in root.children:
-                helper(child, depth+1, res)
+        # iterating approach with queue
         
+        if not root : return []
+        queue = [root]
+        depth = 0
         res = []
-        helper(root, 0, res)
+        
+        while queue:
+            size = len(queue)
+            temp = []
+            while size:
+                size -= 1
+                node = queue.pop(0)
+                temp.append(node.val)
+                for child in node.children:
+                    queue.append(child)
+            res.append(temp)
+            depth += 1
         return res
-            
