@@ -6,15 +6,17 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        def helper(node, depth, res):
-            if not node: return []
-            
-            if len(res) <= depth: res.append([])
-            res[depth].append(node.val)
-            
-            helper(node.left, depth+1, res)
-            helper(node.right, depth+1, res)
-            
+        # BFS approach
+        if not root: return []
+        curr = [root] # curr list to store the node needed to be visit
         res = []
-        helper(root, 0, res)
+        
+        while curr:
+            next_ = []
+            res.append([])
+            for node in curr:
+                res[-1].append(node.val)
+                if node.left: next_.append(node.left)
+                if node.right: next_.append(node.right)
+            curr = next_
         return res
