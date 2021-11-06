@@ -4,15 +4,15 @@ class Solution:
         if len(set(nums)) == 1: return 1
         
         diff1 = nums[1] - nums[0]
-        
-        while diff1 == 0 and len(nums) > 2:
-            nums.pop(0)
-            diff1 = nums[1] - nums[0]
+        idx = 0
+        while diff1 == 0 and idx < len(nums) - 1:
+            idx += 1
+            diff1 = nums[idx + 1] - nums[idx]
             
         sign = (diff1 > 0) * 2 - 1
         count = 2
         
-        for i in range(2, len(nums)):
+        for i in range(2+idx, len(nums)):
             diff = nums[i] - nums[i - 1]
                 
             if diff * sign < 0:
