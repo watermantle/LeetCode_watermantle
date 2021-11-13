@@ -6,7 +6,8 @@
 
 class Solution:
     def detectCycle(self, head: ListNode) -> ListNode:
-        fast, slow = head, head
+        slow, fast = head, head
+        
         while fast:
             if not fast.next: return None
             fast = fast.next.next
@@ -14,9 +15,9 @@ class Solution:
             if fast == slow: break
         else:
             return None
-        
-        new = head
+                
+        new_head = head
         while True:
-            if slow == new: return slow
+            if slow == new_head: return slow
             slow = slow.next
-            new = new.next
+            new_head = new_head.next
