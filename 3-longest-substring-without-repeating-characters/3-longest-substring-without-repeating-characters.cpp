@@ -1,15 +1,18 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        string curr = "";
+        int memo[256] = {0}; // to store all chars, starting with 0
+        int left = 0, right = 0;
         int res = 0;
-        for (auto c: s){
-            if (!count(curr.begin(), curr.end(), c)) curr = curr + c;
-            else{
-                int idx = curr.find(c);
-                curr = curr.substr(idx + 1) + c;
+        
+        while (right < s.length()){
+            memo[s[right]]++; // increase the current char
+            while (memo[s[right]] > 1){
+                memo[s[left]]--;
+                left++;
             }
-            res = res > curr.length() ? res: curr.length();
+            res = max(res, right - left + 1);
+            right++;
         }
         return res;
     }
