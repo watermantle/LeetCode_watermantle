@@ -21,8 +21,8 @@ public:
                 delete temp;
             } else cur = cur->next;
         }
-        ListNode* res = dummy->next;
+        head = dummy->next;
         delete dummy;
-        return res;
+        return head;
     }
 };
