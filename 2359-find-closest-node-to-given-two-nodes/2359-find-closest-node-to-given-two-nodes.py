@@ -22,9 +22,6 @@ class Solution:
         path1 = search(graph, node1)
         path2 = search(graph, node2)
         
-        print(path1)
-        print(path2)
-        
         res = -1
         nodes_shared = set(path1.keys()) & set(path2.keys())
         if not nodes_shared: return res
