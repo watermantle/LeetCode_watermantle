@@ -1,37 +1,21 @@
 class Solution:
     def closestMeetingNode(self, edges: List[int], node1: int, node2: int) -> int:
-        graph = {}
-        for i in range(len(edges)):
-            graph[i] = edges[i]
-        
-        def search(graph, s):
-            idx = 0
-            seen = {s: idx}
-            while True:
-                v_next = graph.get(s, -1)
-                if v_next in seen:
-                    break
-                if v_next != -1:
-                    idx += 1
-                    seen[v_next] = idx
-                    s = v_next
-                else:
-                    break
-            return seen
-        
-        path1 = search(graph, node1)
-        path2 = search(graph, node2)
+        def dfs(i, dis, edges, memo):
+            while i != -1 and memo[i] == -1:
+                memo[i] = dis
+                dis += 1
+                i = edges[i]
+                
+        memo1 = [-1] * len(edges)
+        memo2 = [-1] * len(edges)
+        dfs(node1, 0, edges, memo1)
+        dfs(node2, 0, edges, memo2)
         
         res = -1
-        nodes_shared = set(path1.keys()) & set(path2.keys())
-        if not nodes_shared: return res
+        dis_min = float("inf")
         
-        running_min = float('inf')
-        for node in nodes_shared:
-            dis = max(path1[node], path2[node])
-            if running_min > dis:
-                running_min = dis
-                res = node
-            elif running_min == dis:
-                res = min(node, res)
+        for i in range(len(edges)):
+            if (min(memo1[i], memo2[i]) >= 0 and max(memo1[i], memo2[i]) < dis_min):
+                dis_min = max(memo1[i], memo2[i])
+                res = i
         return res
