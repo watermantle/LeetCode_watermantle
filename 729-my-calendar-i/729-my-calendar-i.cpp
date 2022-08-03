@@ -1,14 +1,15 @@
 class MyCalendar {
 public:
-    vector<pair<int, int>> calendar;
+    map<int, int> calendar;
     MyCalendar() {
+        
     }
     
     bool book(int start, int end) {
-        for (auto item: calendar) {
-            if (item.first < end && start < item.second) return false;
-        }
-        calendar.push_back({start, end});
+        auto next = calendar.lower_bound(start);
+        if (next != calendar.end() && next->first < end) return false;
+        if (next != calendar.begin() && (--next)->second > start) return false;
+        calendar[start] = end;
         return true;
     }
 };
