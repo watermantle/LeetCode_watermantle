@@ -12,17 +12,17 @@ public:
             
             count = countLessEqual(matrix, mid, smaller, larger);
             
-            // cout << "smaller is " << smaller << endl;
-            // cout << "larger is " << larger << endl;
-            
             if (k == count) return smaller;
+            // search for higher part
             if (k > count) start = larger;
+            // search for lower part
             else end = smaller;
         }
         return start;
     }
 private:
     int countLessEqual(vector<vector<int>>& matrix, int& mid, int& smaller, int& larger) {
+        // only count the size of the left part
         int count = 0, n = matrix.size();
         int row = n - 1, col = 0;
         
