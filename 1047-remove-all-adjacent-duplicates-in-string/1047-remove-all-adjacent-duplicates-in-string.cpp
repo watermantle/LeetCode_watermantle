@@ -10,13 +10,11 @@ public:
             else stk.pop();
         }
         
-        stringstream ss;
+        string res = "";
         while (!stk.empty()) {
-            ss << stk.top();
-            cout << stk.top() << endl;
+            res += stk.top();
             stk.pop();
         }
-        string res = ss.str();
         reverse(res.begin(), res.end());
         return res;
     }
