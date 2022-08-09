@@ -1,18 +1,28 @@
-class Solution:
-    def numFactoredBinaryTrees(self, arr: List[int]) -> int:
-        res = 0
-        arr.sort()
-        n = len(arr)
-        dp = [1] * n
-        mod = 10 ** 9 + 7
-        index = {num: i for i, num in enumerate(arr)}
+class Solution {
+public:
+    int numFactoredBinaryTrees(vector<int>& arr) {
+        int n = arr.size();
+        long mod = pow(10, 9) + 7;
+        vector<long> dp(n, 1);
+        sort(arr.begin(), arr.end());
+        unordered_map<int, long> index;
         
-        for i in range(n):
-            for j in range(i):
-                if arr[i] % arr[j] == 0:
-                    right = arr[i] // arr[j]
-                    if right in index:
-                        dp[i] += dp[j] * dp[index[right]]
-                        dp[i] %= mod
-        return sum(dp) % mod
-                    
+        for (int i = 0; i < n; ++i) {
+            index[arr[i]] = i;
+        }
+        
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (arr[i] % arr[j] == 0) {
+                    long right = arr[i] / arr[j];
+                    if (index.count(right)) {
+                        dp[i] = (dp[i] + dp[j] * dp[index[right]]) % mod;
+                    }
+                }
+            }
+        }
+        long res = 0;
+        for (auto& num: dp) res += num;
+        return int(res % mod);
+    }
+};
