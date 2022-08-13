@@ -5,10 +5,9 @@ public:
         int price_buy = INT_MAX;
         
         for (int i = 0; i < prices.size(); ++i) {
-            int price = prices[i];
-            if (price < price_buy) price_buy = price;
+            if (prices[i] < price_buy) price_buy = prices[i];
             else {
-                res = max(res, price - price_buy);
+                res = max(res, prices[i] - price_buy);
             }
         }
         return res;
