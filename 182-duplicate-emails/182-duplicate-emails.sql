@@ -1,8 +1,4 @@
-SELECT  A.email AS Email
-FROM    (
-    SELECT  COUNT(email) AS fq,
-            email
-    FROM    Person
-    GROUP BY email
-) AS A
-WHERE   A.fq > 1
+SELECT  email AS Email
+FROM    Person
+GROUP BY email
+HAVING COUNT(email) > 1
