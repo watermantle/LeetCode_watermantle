@@ -6,18 +6,18 @@
 #         self.right = right
 class Solution:
     def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
-        # build a graph
+        # build a G
         G = collections.defaultdict(list)
         q = [(root, -1)]
         while q:
-            node, parent = q.pop(0)
-            if (parent != -1):
+            node, parent = q.pop()
+            if parent != -1:
                 G[parent].append(node.val)
                 G[node.val].append(parent)
-            
             if node.left: q.append((node.left, node.val))
             if node.right: q.append((node.right, node.val))
-                
+        
+        # bfs part
         que = [start]
         seen = set()
         seen.add(start)
