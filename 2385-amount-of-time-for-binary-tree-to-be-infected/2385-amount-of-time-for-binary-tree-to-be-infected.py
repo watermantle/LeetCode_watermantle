@@ -26,13 +26,11 @@ class Solution:
         res = 0
         
         while que:
-            n = len(que)
-            while n:
+            for _ in range(len(que)):
                 node = que.popleft()
                 for v in G[node]:
                     if v not in seen:
                         que.append(v)
                         seen.add(v)
-                n -= 1
             res += 1
         return res - 1
