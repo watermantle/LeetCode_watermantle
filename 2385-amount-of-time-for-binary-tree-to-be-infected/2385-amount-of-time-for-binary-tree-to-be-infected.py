@@ -4,10 +4,12 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from collections import deque
+from collections import defaultdict
 class Solution:
     def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
         # build a G
-        G = collections.defaultdict(list)
+        G = defaultdict(list)
         q = [(root, -1)]
         while q:
             node, parent = q.pop()
@@ -18,7 +20,7 @@ class Solution:
             if node.right: q.append((node.right, node.val))
         
         # bfs part
-        que = [start]
+        que = deque([start])
         seen = set()
         seen.add(start)
         res = 0
@@ -26,7 +28,7 @@ class Solution:
         while que:
             n = len(que)
             while n:
-                node = que.pop(0)
+                node = que.popleft()
                 for v in G[node]:
                     if v not in seen:
                         que.append(v)
