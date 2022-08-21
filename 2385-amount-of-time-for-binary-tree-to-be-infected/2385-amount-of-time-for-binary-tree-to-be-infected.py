@@ -10,7 +10,7 @@ class Solution:
         G = collections.defaultdict(list)
         q = [(root, -1)]
         while q:
-            node, parent = q.pop()
+            node, parent = q.pop(0)
             if (parent != -1):
                 G[parent].append(node.val)
                 G[node.val].append(parent)
