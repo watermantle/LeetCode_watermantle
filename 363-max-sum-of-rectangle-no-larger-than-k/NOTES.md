@@ -1,0 +1,2 @@
+store all the previous running sums in a sorted order data structure like Binary Search Tree (BST). Use the current sum S (not yet in BST) - k to search BST for a previous sum Sp that is least amount >= than S-k. Upon finding that Sp, extract k' <= k by taking the difference k' = S - Sp. Since Sp >= S-k, S - Sp <= k guaranteed.
+E.g. Sp = S-k+1 -> k' = k-1
