@@ -6,6 +6,7 @@ public:
         
         for (int i = 1; i < nums.size(); ++i) {
             int num = nums[i];
+            // keep curr if curr is positive
             curr = max(num, curr + num);
             res = max(res, curr);
         }
