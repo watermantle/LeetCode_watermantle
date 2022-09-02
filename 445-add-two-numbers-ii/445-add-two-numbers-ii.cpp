@@ -11,30 +11,33 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        stack<int> stk1;
-        stack<int> stk2;
+        l1 = reverseList(l1);
+        l2 = reverseList(l2);
         
-        while (l1) {
-            stk1.push(l1->val);
-            l1 = l1->next;
-        }
-        while (l2) {
-            stk2.push(l2->val);
-            l2 = l2->next;
-        }
+        ListNode* dummyHead = new ListNode(0);
+        ListNode* tail = dummyHead;
         
-        ListNode* head = nullptr;
-        int carry = 0, sum;
-        
-        while (!stk1.empty() || !stk2.empty() || carry) {
-            sum = (!stk1.empty() ? stk1.top() : 0) + (!stk2.empty() ? stk2.top() : 0) + carry;
-            ListNode* tail = new ListNode(sum % 10);
-            carry = sum / 10;
-            if (!stk1.empty()) stk1.pop();
-            if (!stk2.empty()) stk2.pop();
-            tail->next = head;
-            head = tail;
+        int sum_ = 0, carry = 0;
+        while (l1 || l2 || carry) {
+            sum_ = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + carry;
+            tail->next = new ListNode(sum_ % 10);
+            tail = tail->next;
+            carry = sum_ / 10;
+            l1 = l1 ? l1->next : nullptr;
+            l2 = l2 ? l2->next : nullptr;
         }
-        return head;
+        return reverseList(dummyHead->next);
+    }
+private:
+    ListNode* reverseList(ListNode* list) {
+        ListNode* prev = nullptr;
+        ListNode* curr = list;
+        while (curr) {
+            ListNode* temp = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
     }
 };
