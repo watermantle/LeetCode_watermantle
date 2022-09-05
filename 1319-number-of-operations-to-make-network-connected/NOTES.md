@@ -1,0 +1,1 @@
+The number of operations we need = the number of unconnected networks - 1
