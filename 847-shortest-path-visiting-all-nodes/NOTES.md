@@ -1,0 +1,1 @@
+**BFS** guarantees the shortest path in an unweighted graph
