@@ -15,14 +15,14 @@ class Solution:
             seen[i] = 1
             queue.append(i)
             while queue:
-                size = len(queue)
-                while size:
-                    size -= 1
-                    node = queue.popleft()
-                    for v in G[node]:
-                        if seen[v] == 0:
-                            seen[v] = 2 if seen[node] == 1 else 1
-                            queue.append(v)
-                        if seen[v] == seen[node]: return False
+                # size = len(queue)
+                # while size:
+                #     size -= 1
+                node = queue.popleft()
+                for v in G[node]:
+                    if seen[v] == 0:
+                        seen[v] = 2 if seen[node] == 1 else 1
+                        queue.append(v)
+                    if seen[v] == seen[node]: return False
         return True
                         
