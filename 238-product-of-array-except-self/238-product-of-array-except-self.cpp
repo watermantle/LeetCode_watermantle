@@ -11,7 +11,7 @@ public:
         
         int R = 1;
         for (int i = n - 1; i >= 0; --i) {
-            res[i] = res[i] * R;
+            res[i] *= R;
             R *= nums[i];
         }
         return res;
