@@ -1,0 +1,3 @@
+**States**: Define F(i, n) as the number of BSTs, for n nodes, with root i. G(n) as the number of nodes from an integer n. Hence, G(n) = SIgma(F(i, n)) for i from 1 to n. For a given i, let's say 3, from n = 6. We need to know left tree of G(2) ([1, 2]) and number of BST for [4, 5, 6]. Noticed that the later one is equal to G(3) as only number of nodes matters
+**Recurrent Relatiion**: As mentioned in **States** section, F(i, n) = G(i - 1) * G(n - i). Also, we need to sum F(i, n) across i, where 1 <= i <= n, to get G(n)
+**Base Cases**: G[0] and G[1] asre assigned as 1.
