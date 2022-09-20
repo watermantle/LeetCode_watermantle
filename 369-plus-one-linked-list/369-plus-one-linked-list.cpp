@@ -11,25 +11,18 @@
 class Solution {
 public:
     ListNode* plusOne(ListNode* head) {
+        if (!head) return head;
+        
         ListNode* new_head = reverseList(head);
-        if (new_head->val <= 8) new_head->val += 1;
-        else {
-            ListNode* dummy_head = new ListNode(0, new_head);
-            while (new_head->next && new_head->val == 9) {
-                new_head->val = 0;
-                new_head = new_head->next;
-            }
-            int val = new_head->val != 9 ? new_head->val + 1 : 1;
-            cout << val << endl;
-            if (new_head->val == 9) {
-                new_head->next = new ListNode(val);
-                new_head->val = 0;
-            }
-            else {
-                new_head->val = val;
-            }
-            return reverseList(dummy_head->next);
+        int carry = 1;
+        ListNode* curr = new_head;
+        while (curr && carry != 0) {
+            int val = curr->val + carry;
+            carry = val > 9 ? 1 : 0;
+            curr->val = val % 10;
+            curr = curr->next;
         }
+        if (carry > 0) head->next = new ListNode(carry);
         return reverseList(new_head);
     }
 private:
