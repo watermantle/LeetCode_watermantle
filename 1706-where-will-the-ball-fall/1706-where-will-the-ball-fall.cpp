@@ -11,10 +11,10 @@ private:
     int findBallCol(vector<vector<int>>& grid, int r, int c) {
         int m = grid.size(), n = grid[0].size();
         if (r == m) return c;
-        int c_new = c + grid[r][c];
-        if (c_new < 0 or c_new >= n or grid[r][c] != grid[r][c_new]) {
+        int cNew = c + grid[r][c];
+        if (cNew < 0 || cNew >= n || grid[r][c] != grid[r][cNew]) {
             return -1;
         }
-        return findBallCol(grid, r + 1, c_new);
+        return findBallCol(grid, r + 1, cNew);
     }
 };
