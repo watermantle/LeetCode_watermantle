@@ -18,13 +18,10 @@ class Solution:
         seen = set([start])
         
         while queue:
-            size = len(queue)
-            while size:
-                size -= 1
-                node, n = queue.popleft()
-                if node == end: return n
-                for v in G[node]:
-                    if v not in seen:
-                        queue.append((v, n + 1))
-                        seen.add(v)
+            node, n = queue.popleft()
+            if node == end: return n
+            for v in G[node]:
+                if v not in seen:
+                    queue.append((v, n + 1))
+                    seen.add(v)
         return -1
